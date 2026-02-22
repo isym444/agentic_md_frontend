@@ -1,0 +1,7 @@
+<h2>DDX (Differential Diagnosis)</h2>
+
+<ol>
+  @for (ddx of ddxs; track ddx.ddxId) {
+    <li>{{ ddx.aiGeneratedDdx }}</li>
+  }
+</ol>

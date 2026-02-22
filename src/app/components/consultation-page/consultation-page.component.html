@@ -1,0 +1,8 @@
+<div class="container">
+  @if (!hasConsultSummary) {
+    <app-speech-capture />
+  } @else {
+    <app-history-summary />
+    <app-orders />
+  }
+</div>

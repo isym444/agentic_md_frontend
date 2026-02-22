@@ -1,0 +1,147 @@
+<p-toast></p-toast>
+
+<p-card header="Add new patient" styleClass="mb-3">
+  <form
+    [formGroup]="newPatientForm"
+    (ngSubmit)="submitNewPatient()"
+    class="new-patient-form"
+  >
+    <div class="grid">
+      <div class="col-12 md:col-6">
+        <label class="field-label" for="first_name">First name</label>
+        <input
+          id="first_name"
+          type="text"
+          pInputText
+          formControlName="first_name"
+          placeholder="e.g. Maria"
+        />
+        <small
+          class="p-error"
+          *ngIf="
+            newPatientForm.get('first_name')?.touched &&
+            newPatientForm.get('first_name')?.invalid
+          "
+        >
+          First name is required.
+        </small>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label class="field-label" for="last_name">Last name</label>
+        <input
+          id="last_name"
+          type="text"
+          pInputText
+          formControlName="last_name"
+          placeholder="e.g. Gonzalez"
+        />
+        <small
+          class="p-error"
+          *ngIf="
+            newPatientForm.get('last_name')?.touched &&
+            newPatientForm.get('last_name')?.invalid
+          "
+        >
+          Last name is required.
+        </small>
+      </div>
+
+      <div class="col-12 md:col-6">
+        <label class="field-label" for="date_of_birth">Date of birth</label>
+
+        <!-- ✅ PrimeNG 21 DatePicker -->
+        <p-datePicker
+          inputId="date_of_birth"
+          formControlName="date_of_birth"
+          [showIcon]="true"
+          dateFormat="dd/mm/yy"
+          [maxDate]="today"
+          placeholder="dd/mm/yyyy"
+        ></p-datePicker>
+
+        <small
+          class="p-error"
+          *ngIf="
+            newPatientForm.get('date_of_birth')?.touched &&
+            newPatientForm.get('date_of_birth')?.invalid
+          "
+        >
+          Date of birth is required.
+        </small>
+      </div>
+
+      <div class="col-12">
+        <label class="field-label" for="hpc">HPC (optional)</label>
+
+        <!-- ✅ PrimeNG 21 Textarea -->
+        <textarea
+          id="hpc"
+          pTextarea
+          formControlName="hpc"
+          rows="3"
+          placeholder="Presenting complaint + brief story..."
+        ></textarea>
+      </div>
+
+      <div class="col-12 flex gap-2 justify-content-end">
+        <button
+          pButton
+          type="button"
+          label="Clear"
+          severity="secondary"
+          [disabled]="isSubmitting"
+          (click)="clearNewPatientForm()"
+        ></button>
+
+        <button
+          pButton
+          type="submit"
+          label="Create patient"
+          [loading]="isSubmitting"
+          [disabled]="isSubmitting"
+        ></button>
+      </div>
+    </div>
+  </form>
+</p-card>
+
+<div class="card">
+  <p-table
+    [value]="patientListForDoctor"
+    [tableStyle]="{ 'min-width': '60rem' }"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    selectionMode="single"
+    [(selection)]="selectedPatient"
+    (onRowSelect)="onRowSelect($event)"
+    dataKey="patient_id"
+  >
+    <ng-template #header>
+      <tr>
+        <th>Patient ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Date of birth</th>
+        <th>HPC</th>
+      </tr>
+    </ng-template>
+
+    <ng-template #body let-patient>
+      <tr [pSelectableRow]="patient" style="cursor: pointer">
+        <td>{{ patient.patient_id }}</td>
+        <td>{{ patient.first_name }}</td>
+        <td>{{ patient.last_name }}</td>
+        <td>{{ patient.date_of_birth | date: "dd/MM/yyyy" }}</td>
+        <td>{{ patient.hpc }}</td>
+      </tr>
+    </ng-template>
+
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="5">No patients found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -1,0 +1,31 @@
+<div class="mic-viewport">
+  @if (isLoading) {
+    <div class="loading-container">
+      <p-progressSpinner 
+        styleClass="custom-spinner" 
+        strokeWidth="4" 
+        fill="transparent" 
+        animationDuration="5s">
+      </p-progressSpinner>
+      <p class="status-message loading-text">Loading...</p>
+    </div>
+  } 
+  @else {
+    <div class="entrance-container">
+      <div class="mic-wrapper">
+        @if (isRecording) { <div class="pulse-ring"></div> }
+        <button 
+          pButton 
+          type="button" 
+          [icon]="isRecording ? 'pi pi-stop' : 'pi pi-microphone'" 
+          class="p-button-rounded giant-mic-btn"
+          [class.is-recording]="isRecording"
+          (click)="toggleRecording()">
+        </button>
+      </div>
+      <p class="status-message">
+        {{ isRecording ? 'I am listening...' : 'Ready to record' }}
+      </p>
+    </div>
+  }
+</div>

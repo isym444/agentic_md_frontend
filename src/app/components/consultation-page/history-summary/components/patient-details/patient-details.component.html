@@ -1,0 +1,30 @@
+<h2>Patient Details</h2>
+
+<div class="kv">
+  <div class="k">Name / ID</div>
+  <div>
+    Mr {{ patient.first_name }} {{ patient.last_name }} (Hospital #{{
+      patient.patient_id
+    }})
+  </div>
+
+  <div class="k">Age / Sex</div>
+  <div>{{ calculateAge(patient.date_of_birth) }}-year-old male</div>
+
+  <!-- <div class="k">Date / Time</div>
+    <div>
+      {{ consultationMeta.dateTime | date: "dd MMM yyyy – HH:mm" }}
+    </div> -->
+
+  <div class="k">Clerked by</div>
+  <div>
+    {{ doctor.specialty }} – Dr {{ doctor.first_name }} {{ doctor.last_name }}
+  </div>
+
+  <!-- <div class="k">Presenting complaint</div>
+    <div>
+      {{ consultationMeta.presentingComplaint }}
+    </div> -->
+</div>
+
+<br />

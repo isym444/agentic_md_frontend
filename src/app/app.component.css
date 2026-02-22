@@ -1,0 +1,384 @@
+/* ── Google Font import ──────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600&family=DM+Mono:wght@400;500&display=swap");
+
+/* ── Design Tokens ───────────────────────────────────── */
+:root {
+  /* Backgrounds — warm charcoal, not blue-tinted */
+  --bg: #1a1b1e;
+  --bg-2: #212226;
+  --surface: #27282d;
+  --surface-2: #2e3036;
+  --surface-3: #34363d;
+
+  /* Borders */
+  --border: #3a3c43;
+  --border-2: #4a4d57;
+
+  /* Text */
+  --text: #ececec;
+  --text-2: #9a9ba8;
+  --text-3: #5a5c68;
+
+  /* Accent — coral/salmon (Claude brand) */
+  --accent: #d4704a;
+  --accent-hover: #e07f59;
+  --accent-dim: rgba(212, 112, 74, 0.14);
+  --accent-glow: rgba(212, 112, 74, 0.32);
+
+  /* Semantic */
+  --green: #34d399;
+  --green-dim: rgba(52, 211, 153, 0.12);
+  --amber: #fbbf24;
+  --amber-dim: rgba(251, 191, 36, 0.12);
+  --red: #f87171;
+  --red-dim: rgba(248, 113, 113, 0.12);
+
+  /* Misc */
+  --radius: 10px;
+  --radius-sm: 7px;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.25);
+  --shadow-glow: 0 0 0 3px var(--accent-glow);
+
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Resets ──────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ── Header ──────────────────────────────────────────── */
+.app-header {
+  height: 56px;
+  padding: 0 24px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: none;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-2);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+/* Animated pulse dot — coral to match accent */
+.logo::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+  animation: pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 8px var(--accent-glow);
+  }
+  50% {
+    opacity: 0.55;
+    box-shadow: 0 0 18px var(--accent-glow);
+  }
+}
+
+.profile-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 1.5px solid var(--border);
+  transition:
+    border-color 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.profile-img:hover {
+  transform: scale(1.07);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ── Main ────────────────────────────────────────────── */
+.main {
+  padding: 36px 44px;
+  max-width: 1360px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.content h1 {
+  font-size: 1.55rem;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 28px;
+  line-height: 1.2;
+}
+
+/* ── Cards / Panels / Containers ────────────────────── */
+.card,
+[class*="card"],
+[class*="panel"],
+[class*="container"] {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.card:hover,
+[class*="card"]:hover {
+  border-color: var(--border-2);
+  box-shadow: var(--shadow-md);
+}
+
+/* ── Tables ──────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.865rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+thead {
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--border);
+}
+
+thead th {
+  padding: 11px 18px;
+  text-align: left;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  white-space: nowrap;
+  font-family: "DM Mono", monospace;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s;
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background: var(--surface-2);
+}
+
+tbody td {
+  padding: 12px 18px;
+  color: var(--text);
+  vertical-align: middle;
+  line-height: 1.45;
+}
+
+/* ── Badges inside tables ────────────────────────────── */
+td [class*="badge"],
+td [class*="status"],
+td [class*="tag"] {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ── Buttons ─────────────────────────────────────────── */
+button,
+[class*="btn"] {
+  cursor: pointer;
+  font: inherit;
+  border-radius: var(--radius-sm);
+  transition:
+    background 0.15s,
+    transform 0.1s,
+    box-shadow 0.15s,
+    border-color 0.15s;
+}
+
+/* Primary */
+.btn-primary,
+button[class*="primary"],
+[class*="btn-primary"] {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 9px 18px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  box-shadow: 0 2px 8px rgba(212, 112, 74, 0.3);
+}
+
+.btn-primary:hover,
+button[class*="primary"]:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(212, 112, 74, 0.45);
+}
+
+/* Secondary / ghost */
+.btn-secondary,
+button[class*="secondary"],
+[class*="btn-secondary"] {
+  background: transparent;
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 450;
+}
+
+.btn-secondary:hover,
+button[class*="secondary"]:hover {
+  background: var(--surface-2);
+  border-color: var(--border-2);
+  color: var(--text);
+}
+
+/* Danger */
+.btn-danger,
+button[class*="danger"] {
+  background: var(--red-dim);
+  color: var(--red);
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  padding: 8px 16px;
+  font-size: 0.875rem;
+}
+
+button[class*="danger"]:hover {
+  background: rgba(248, 113, 113, 0.2);
+}
+
+/* ── Inputs ──────────────────────────────────────────── */
+input,
+select,
+textarea {
+  font: inherit;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 13px;
+  color: var(--text);
+  font-size: 0.875rem;
+  outline: none;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s,
+    background 0.15s;
+  -webkit-font-smoothing: antialiased;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--border-2);
+  background: var(--surface-2);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+  background: var(--surface-2);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-3);
+}
+
+/* ── Links ───────────────────────────────────────────── */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+a:hover {
+  color: var(--accent-hover);
+}
+
+/* ── Utility: status colour helpers ─────────────────── */
+.status-green,
+[class*="success"],
+[class*="active"] {
+  color: var(--green);
+  background: var(--green-dim);
+}
+
+.status-amber,
+[class*="pending"],
+[class*="warning"] {
+  color: var(--amber);
+  background: var(--amber-dim);
+}
+
+.status-red,
+[class*="error"],
+[class*="danger"] {
+  color: var(--red);
+  background: var(--red-dim);
+}
+
+/* ── Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-2);
+}
+
+/* ── Selection ───────────────────────────────────────── */
+::selection {
+  background: var(--accent-dim);
+  color: var(--text);
+}

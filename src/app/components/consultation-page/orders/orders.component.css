@@ -1,0 +1,200 @@
+:root {
+  --bg: #0b0f14;
+  --card: #121926;
+  --text: #e8eef7;
+  --muted: #a7b3c5;
+  --line: #223047;
+  --accent: #7aa2ff;
+}
+body {
+  margin: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+.wrap {
+  max-width: 980px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+header {
+  margin-bottom: 18px;
+}
+h1 {
+  margin: 0 0 6px 0;
+  font-size: 22px;
+}
+.sub {
+  color: var(--muted);
+  font-size: 13px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  margin: 12px 0;
+}
+h2 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: var(--accent);
+}
+h3 {
+  margin: 14px 0 6px 0;
+  font-size: 14px;
+}
+p,
+li {
+  color: var(--text);
+  line-height: 1.45;
+}
+ul {
+  margin: 6px 0 0 18px;
+  padding: 0;
+}
+.grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 860px) {
+  .grid.two {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.kv {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 10px;
+  font-size: 14px;
+}
+.k {
+  color: var(--muted);
+}
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.table th,
+.table td {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 10px;
+  vertical-align: top;
+}
+.table th {
+  text-align: left;
+  color: var(--muted);
+  font-weight: 600;
+}
+.muted {
+  color: var(--muted);
+}
+.hr {
+  height: 1px;
+  background: var(--line);
+  margin: 14px 0;
+}
+:host ::v-deep .p-datatable-table {
+  table-layout: fixed !important;
+  width: 100%;
+}
+.column-wrap {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal !important;
+  vertical-align: top;
+  padding: 1rem !important;
+}
+.flex.gap-2 {
+  flex-wrap: wrap; 
+  justify-content: flex-start;
+}
+button[pButton] {
+  margin-bottom: 4px;
+}
+.button-row {
+  display: flex;
+  flex-direction: row;      /* Places buttons side-by-side */
+  justify-content: center;  /* Centers the pair of buttons in the column */
+  gap: 10px;                /* Space between the two buttons */
+  width: 100%;
+}
+:host ::ng-deep .custom-width-btn.p-button {
+  width: 49% !important;     /* Each button takes 40% of the column width */
+  min-width: 70px;           /* Prevents text squishing on small screens */
+  display: flex !important;
+  justify-content: center !important; 
+  align-items: center !important;
+  white-space: nowrap;       /* Keeps "Accept" or "Reject" on one line */
+}
+:host ::ng-deep .custom-width-btn .p-button-label {
+  flex: none !important;
+  text-align: center !important;
+}
+:host ::ng-deep .p-datatable-table {
+  table-layout: fixed !important;
+  width: 100%;
+  border-spacing: 0; /* Ensures no extra gaps between cells */
+}
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th:first-child,
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td:first-child {
+  padding-left: 2rem !important;  /* Adjust this value to your preferred "margin" */
+  padding-right: 1rem;            /* Standard inner padding */
+}
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th:last-child,
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td:last-child {
+  padding-right: 2rem !important; /* Must match the padding-left above */
+  padding-left: 1rem;             /* Standard inner padding */
+}
+.button-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+:host ::ng-deep .custom-width-btn.p-button-success {
+  background: rgba(34, 197, 94, 0.15) !important;
+  background-color: rgba(34, 197, 94, 0.15) !important;
+  color: #15803d !important;      
+  border: 1px solid rgba(34, 197, 94, 0.4) !important;
+  opacity: 1 !important; 
+  box-shadow: none !important;
+}
+:host ::ng-deep .custom-width-btn.p-button-success:hover {
+  background: rgba(34, 197, 94, 0.25) !important;
+  background-color: rgba(34, 197, 94, 0.25) !important;
+  border-color: rgba(21, 128, 61, 0.5) !important;
+  color: #25a155 !important; /* Slightly darker text on hover */
+}
+:host ::ng-deep .custom-width-btn.p-button-danger {
+  background: rgba(239, 68, 68, 0.1) !important;
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  color: #991b1b !important;      
+  border: 1px solid rgba(239, 68, 68, 0.2) !important;
+  box-shadow: none !important;
+}
+:host ::ng-deep .custom-width-btn.p-button-danger:hover {
+  background: rgba(239, 68, 68, 0.18) !important;
+  background-color: rgba(239, 68, 68, 0.18) !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  color: #7f1d1d !important; 
+}

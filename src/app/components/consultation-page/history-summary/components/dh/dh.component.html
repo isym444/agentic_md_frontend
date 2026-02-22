@@ -1,0 +1,16 @@
+<h2>DH (Drug History) & Allergies</h2>
+
+@if (drugHistory.length === 0) {
+  <p>No medications recorded.</p>
+} @else {
+  <ul>
+    @for (drug of drugHistory; track drug.drugId) {
+      <li>
+        {{ drug.drugName }}
+        <span class="muted">({{ drug.timesPerDay }}x/day)</span>
+      </li>
+    }
+  </ul>
+}
+
+<br />

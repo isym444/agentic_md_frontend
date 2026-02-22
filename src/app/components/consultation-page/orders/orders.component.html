@@ -1,0 +1,110 @@
+<div class="wrap">
+  <h2>Medical Orders</h2>
+
+  <h3>For doctor confirmation</h3>
+
+@if (ordersForConfirmation.length === 0) {
+  <p>No orders awaiting confirmation.</p>
+} @else {
+  <p-table
+    [value]="ordersForConfirmation"
+    [tableStyle]="{ 'min-width': '56rem' }"
+    class="custom-chat-table"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 20%" class="column-wrap">Specific Test</th>
+        
+        <th style="width: 50%" class="column-wrap">AI Justification</th>
+        
+        <th style="width: 30%">Action</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-order>
+      <tr>
+        <td class="column-wrap">{{ order.specificTest }}</td>
+        <td class="column-wrap">{{ order.aiJustification }}</td>
+          <td class="text-center">
+            <div class="button-row">
+              <button
+                pButton
+                type="button"
+                label="Accept"
+                severity="success"
+                class="custom-width-btn"
+                (click)="acceptOrder(order.orderId)"
+              ></button>
+              <button
+                pButton
+                type="button"
+                label="Reject"
+                severity="danger"
+                class="custom-width-btn"
+                (click)="rejectOrder(order.orderId)"
+              ></button>
+            </div>
+          </td>
+      </tr>
+    </ng-template>
+  </p-table>
+}
+
+  <h3>Sent orders</h3>
+
+  @if (orders.length === 0) {
+    <p>No orders recorded.</p>
+  } @else {
+    @for (order of orders; track order.orderId) {
+      <section class="card order-card">
+        <h3>{{ order.orderType }} – {{ order.specificTest }}</h3>
+
+        <div class="order-meta">
+          <p><strong>Status:</strong> {{ order.status }}</p>
+          <p>
+            <strong>Ordered:</strong>
+            {{ order.createdAt | date: "dd MMM yyyy – HH:mm" }}
+          </p>
+          <p><strong>Reason:</strong> {{ order.aiJustification }}</p>
+        </div>
+
+        <!-- Blood Results -->
+        @if (order.bloodResults?.length) {
+          <h4>Blood Results</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Biomarker</th>
+                <th>Value</th>
+                <th>Reference</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (result of order.bloodResults; track result.resultId) {
+                <tr>
+                  <td>{{ result.biomarker }}</td>
+                  <td>{{ result.value }} {{ result.unit }}</td>
+                  <td>{{ result.referenceRange }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        }
+
+        <!-- Radiology Findings -->
+        @if (order.radiologyFindings?.length) {
+          <h4>Radiology Report</h4>
+          @for (finding of order.radiologyFindings; track finding.findingId) {
+            <div class="radiology-report">
+              <p>{{ finding.reportText }}</p>
+              <p class="muted">
+                Reported by {{ finding.reportedBy }} on
+                {{ finding.receivedAt | date: "dd MMM yyyy – HH:mm" }}
+              </p>
+            </div>
+          }
+        }
+      </section>
+    }
+  }
+</div>
